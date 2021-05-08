@@ -1,0 +1,8 @@
+REQUISITI DEL SISTEMA
+
+•	Il cliente inizialmente dovrà configurare il sistema, collegandolo ad internet per renderlo smart.
+•	Ci sarà un grafico che segna l’umidità vicino alla finestra per controllare che sia uguale a all’umidità lontano da essa.
+•	Un grafico per la temperatura che controlla se vicino alla finestra ci sia la stessa temperatura che c’è lontano dalla finestra.
+
+
+

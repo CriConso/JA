@@ -1,0 +1,20 @@
+Nome progetto:
+CoSoBaSa
+
+Componenti e ruoli:
+Capogruppo -> Consonni Cristian
+Vicecapogruppo -> Soggiu Marco
+Leader-> Baccaglini Christian
+Mediatore  -> Saetti Elia
+
+Descrizione problema:
+Verificare in quale situazione sia necessario accendere il termosifone,
+ verificarne la temperatura e umidità ideale.
+
+Descrizione soluzione:
+Sensore d'umidità che controlla se l'umidificatore del calorifero è pieno d'acqua,
+ in più se è necessario accendere il calorifero controllando la differenza di temperatura
+ tra il luogo all'opposto al calorifero e l'altro davanti alla finestra.
+
+Elenco prodotti:
+Sensore umidità - Modulo wireless
