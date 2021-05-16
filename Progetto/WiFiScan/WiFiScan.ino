@@ -5,10 +5,11 @@
 */
 #include "ESP8266WiFi.h"
 
+String retiinfovett[10];
 String ssidvett[10];
 void setup() {
   Serial.begin(115200);
-  Serial.println("Setup starts - v. 0.2");
+  Serial.println("Setup starts - v. 0.5");
   // Set WiFi to station mode and disconnect from an AP if it was previously connected
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
@@ -33,34 +34,36 @@ void Scannerizzazione(){
 
   // WiFi.scanNetworks will return the number of networks found
   int n = WiFi.scanNetworks();
-  Serial.println("Scansione terminata.");
+  Serial.println("f");
   if (n == 0) {
     Serial.println("Nessuna rete trovata");
   } 
   else{
-    Serial.print(n);
-    Serial.println(" reti trovate");
+    Serial.println(n);
+    delay(100);
+    //Serial.println(" reti trovate");
     for (int i = 0; i < n; ++i) {
       // Print SSID and RSSI for each network found
       ESP.wdtFeed();
-      Serial.print(i + 1);
-      Serial.print(": ");
+      //Serial.print(i + 1);
+      //Serial.print(": ");
       ssidvett[i] = WiFi.SSID(i);
-      Serial.print(" (");
-      ssidvett[i] += WiFi.RSSI(i);
-      Serial.print(")");
-      ssidvett[i] +=(WiFi.encryptionType(i) == ENC_TYPE_NONE) ? " - Senza sicurezza" : " - Con sicurezza";
+      //retiinfovett[i] = WiFi.SSID(i);
+      //Serial.print(" (");
+      retiinfovett[i] += WiFi.RSSI(i);
+      //Serial.print(")");
+      retiinfovett[i] +=(WiFi.encryptionType(i) == ENC_TYPE_NONE) ? " - Senza sicurezza" : " - Con sicurezza";
       Serial.println(ssidvett[i]);
       delay(500);
     }
-    bool c=false;
+    bool scegrete=false;
     String is;
     long j = -1;
     Serial.read();
     Serial.read();
     Serial.println("Digitare il numero della rete desiderata: ");
     int cont=0;
-    while(!c){
+    while(!scegrete){
       //Serial.println("Tentativo numero " + cont);
       //cont++;   
       while(Serial.available()==0);
@@ -76,7 +79,7 @@ void Scannerizzazione(){
           else{
             Serial.println("Connessione alla rete " + ssidvett[j]+"...");
             //WiFi.softAP(ssid, password);
-            c=true;
+            scegrete=true;
             Serial.print("AP IP address: ");
             Serial.println("Fatto");
           }

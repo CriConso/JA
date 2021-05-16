@@ -8,3 +8,4 @@ D:\Utenti\MAALFING\Documents\ProgettoJA2\Progetto\ProgettoJAC#\ProgettoJA\obj\De
 D:\Utenti\MAALFING\Documents\ProgettoJA2\Progetto\ProgettoJAC#\ProgettoJA\obj\Debug\ProgettoJA.csproj.CoreCompileInputs.cache
 D:\Utenti\MAALFING\Documents\ProgettoJA2\Progetto\ProgettoJAC#\ProgettoJA\obj\Debug\ProgettoJA.exe
 D:\Utenti\MAALFING\Documents\ProgettoJA2\Progetto\ProgettoJAC#\ProgettoJA\obj\Debug\ProgettoJA.pdb
+D:\Utenti\MAALFING\Documents\ProgettoJA2\Progetto\ProgettoJAC#\ProgettoJA\obj\Debug\ProgettoJA.Collegamento.resources

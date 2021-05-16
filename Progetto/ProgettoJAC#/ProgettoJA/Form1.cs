@@ -21,5 +21,12 @@ namespace ProgettoJA
         {
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Collegamento C = new Collegamento();
+            C.Show();
+            this.Hide();
+        }
     }
 }
