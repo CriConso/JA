@@ -5,9 +5,10 @@
 */
 #include "ESP8266WiFi.h"
 
+String ssidvett[10];
 void setup() {
   Serial.begin(115200);
-  Serial.println("Setup starts");
+  Serial.println("Setup starts - v. 0.2");
   // Set WiFi to station mode and disconnect from an AP if it was previously connected
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
@@ -17,42 +18,84 @@ void setup() {
 }
 
 void loop() {
+  for(int i=0;i<10;i++){
+    ssidvett[i]=" ";
+  }
   if(Serial.available()>0){
     if(Serial.read()=='a');{
       Scannerizzazione();
     }
   }
-  // Wait a bit before scanning again
-  digitalWrite(2,HIGH);
-  Serial.println("Acceso");
-  delay(2000);
-  Serial.println("Spento");
-  digitalWrite(2,LOW);
-  delay(2000);
 }
 
 void Scannerizzazione(){
-  Serial.println("scan start");
+  Serial.println("Scansione d'area...");
 
   // WiFi.scanNetworks will return the number of networks found
   int n = WiFi.scanNetworks();
-  Serial.println("scan done");
+  Serial.println("Scansione terminata.");
   if (n == 0) {
-    Serial.println("no networks found");
-  } else {
+    Serial.println("Nessuna rete trovata");
+  } 
+  else{
     Serial.print(n);
-    Serial.println(" networks found");
+    Serial.println(" reti trovate");
     for (int i = 0; i < n; ++i) {
       // Print SSID and RSSI for each network found
+      ESP.wdtFeed();
       Serial.print(i + 1);
       Serial.print(": ");
-      Serial.print(WiFi.SSID(i));
+      ssidvett[i] = WiFi.SSID(i);
       Serial.print(" (");
-      Serial.print(WiFi.RSSI(i));
+      ssidvett[i] += WiFi.RSSI(i);
       Serial.print(")");
-      Serial.println((WiFi.encryptionType(i) == ENC_TYPE_NONE) ? " " : "*");
-      delay(10);
+      ssidvett[i] +=(WiFi.encryptionType(i) == ENC_TYPE_NONE) ? " - Senza sicurezza" : " - Con sicurezza";
+      Serial.println(ssidvett[i]);
+      delay(500);
     }
-  }
-  Serial.println("");  
+    bool c=false;
+    String is;
+    long j = -1;
+    Serial.read();
+    Serial.read();
+    Serial.println("Digitare il numero della rete desiderata: ");
+    int cont=0;
+    while(!c){
+      //Serial.println("Tentativo numero " + cont);
+      //cont++;   
+      while(Serial.available()==0);
+      is=Serial.read();
+      j=is.toInt()-1;
+      if((j>n)||((int)j<48||(int)j>57)){
+       Serial.println("is: "+is);
+          if((ssidvett[j]==" ")){
+            Serial.print("La rete ");
+            Serial.print((int)j); 
+            Serial.println(" è inesistente");
+          }
+          else{
+            Serial.println("Connessione alla rete " + ssidvett[j]+"...");
+            //WiFi.softAP(ssid, password);
+            c=true;
+            Serial.print("AP IP address: ");
+            Serial.println("Fatto");
+          }
+        }
+      Serial.read();
+      Serial.read();
+      Serial.read();
+    }
+        
+
+        //IPAddress myIP = WiFi.softAPIP();
+        
+        //Serial.println(myIP);
+        delay(1000);
+        
+      
+  }  
 }
+
+//bool ESP8266WiFiSTAClass::isConnected() {
+//    return (status() == WL_CONNECTED);
+//}

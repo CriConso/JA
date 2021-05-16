@@ -1,0 +1,10 @@
+D:\Utenti\MAALFING\Documents\ProgettoJA2\Progetto\ProgettoJAC#\ProgettoJA\bin\Debug\ProgettoJA.exe.config
+D:\Utenti\MAALFING\Documents\ProgettoJA2\Progetto\ProgettoJAC#\ProgettoJA\bin\Debug\ProgettoJA.exe
+D:\Utenti\MAALFING\Documents\ProgettoJA2\Progetto\ProgettoJAC#\ProgettoJA\bin\Debug\ProgettoJA.pdb
+D:\Utenti\MAALFING\Documents\ProgettoJA2\Progetto\ProgettoJAC#\ProgettoJA\obj\Debug\ProgettoJA.csprojAssemblyReference.cache
+D:\Utenti\MAALFING\Documents\ProgettoJA2\Progetto\ProgettoJAC#\ProgettoJA\obj\Debug\ProgettoJA.Form1.resources
+D:\Utenti\MAALFING\Documents\ProgettoJA2\Progetto\ProgettoJAC#\ProgettoJA\obj\Debug\ProgettoJA.Properties.Resources.resources
+D:\Utenti\MAALFING\Documents\ProgettoJA2\Progetto\ProgettoJAC#\ProgettoJA\obj\Debug\ProgettoJA.csproj.GenerateResource.cache
+D:\Utenti\MAALFING\Documents\ProgettoJA2\Progetto\ProgettoJAC#\ProgettoJA\obj\Debug\ProgettoJA.csproj.CoreCompileInputs.cache
+D:\Utenti\MAALFING\Documents\ProgettoJA2\Progetto\ProgettoJAC#\ProgettoJA\obj\Debug\ProgettoJA.exe
+D:\Utenti\MAALFING\Documents\ProgettoJA2\Progetto\ProgettoJAC#\ProgettoJA\obj\Debug\ProgettoJA.pdb
