@@ -1,0 +1,10 @@
+CASI D'USO
+-Il dispositivo ha come obiettivo primario quello di gestire la temperatura in una stanza, dati due dispositivi uguali posti uno in prossimità dell'umidificatore del calorifero/finestra e l'altro nella parte opposta della stanza,
+ il sistema tramite i due moduli wireless manderà i dati relati all'umidità e alla temperatura al relativo programma, in base all'analisi dei dati il programma si dividerà in due casi:
+	-Caso1: Se dovessero risultare, dei livelli di umidità troppo bassi, il sistema rivelerà la mancanza di acqua nell' umidificatore mandando una mail di avviso, per ricordare di riempirlo.
+	-Caso2: Se dovesse risultare uno sbalzo di temperatura eccessivo tra la finestra/calorifero e la parte opposta della stanza il sistema manderà una mail all'utente con il fine di ricordargli di accendere il calorifero
+	 	per ristabilire la parità di temperatura.
+
+-Il dispositivo può essere utilizzato inoltre come semplice termometro, gestibile tramite il relativo programma.
+-Oppure può essere utilizzato come semplice rilevatore d'umidità, sempre gestibile tramite programma.
+-Come ultima opzione il dispositivo può essere utilizzato per controllare la differenza tra temperatura interna ed esterna per verificare se ci sia effettivamente bisogno di utilizzare il calorifero.
