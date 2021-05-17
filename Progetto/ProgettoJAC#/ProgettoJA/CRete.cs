@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProgettoJA
 {
-    class CRete
+    public class CRete
     {
         string SSID;
         string PW;
@@ -41,5 +41,11 @@ namespace ProgettoJA
         {
             return SSID;
         }
+
+        public string getPW()
+        {
+            return PW;
+        }
+
     }
 }
