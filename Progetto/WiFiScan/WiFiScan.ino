@@ -7,12 +7,15 @@
 
 String retiinfovett[10];
 String ssidvett[10];
+String ssidconnesso;
 void setup() {
   Serial.begin(115200);
-  Serial.println("Setup starts - v. 0.5");
+  Serial.println("Setup starts - v. 0.7");
   // Set WiFi to station mode and disconnect from an AP if it was previously connected
+//  if(WiFi.status() != WL_CONNECTED){
+//    
+//  }
   WiFi.mode(WIFI_STA);
-  WiFi.disconnect();
   delay(100);
 
   Serial.println("Setup done");
@@ -22,9 +25,17 @@ void loop() {
   for(int i=0;i<10;i++){
     ssidvett[i]=" ";
   }
-  if(Serial.available()>0){
-    if(Serial.read()=='a');{
+  if(Serial.available()>0){ //MIO METODO D’AVAILABLE
+    String letto;
+    letto = Serial.read();
+    if(letto == "a"){ //SCANERIZZAZIONE DELLE RETI D’AREA
       Scannerizzazione();
+    }else if(letto == "b"){ //CONTROLLO CONNESIONE
+      Serial.println("Controllo Connessione");
+      ControllaConnessione();
+    }else if(letto == "c"){ //DISCONNETTI SE CONNESSO
+      Serial.println("Mi disconnetto");
+      WiFi.disconnect();
     }
   }
 }
@@ -32,7 +43,7 @@ void loop() {
 void Scannerizzazione(){
   Serial.println("Scansione d'area...");
 
-  // WiFi.scanNetworks will return the number of networks found
+  // WiFi.scanNetworks ritornerà il numero delle reti d’area trovate
   int n = WiFi.scanNetworks();
   Serial.println("f");
   if (n == 0) {
@@ -61,12 +72,10 @@ void Scannerizzazione(){
     long j = -1;
     Serial.read();
     Serial.read();
-    Serial.println("Digitare il numero della rete desiderata: ");
+    //Serial.println("Digitare il numero della rete d'area desiderata: ");
     int cont=0;
-    while(!scegrete){
-      //Serial.println("Tentativo numero " + cont);
-      //cont++;   
-      while(Serial.available()==0);
+    while(!scegrete){  
+      while(Serial.available()==0); //METODO D’AVAILABLE D’EMANUELE
       is=Serial.read();
       j=is.toInt()-1;
       if((j>n)||((int)j<48||(int)j>57)){
@@ -77,26 +86,77 @@ void Scannerizzazione(){
             Serial.println(" è inesistente");
           }
           else{
-            Serial.println("Connessione alla rete " + ssidvett[j]+"...");
+            Serial.println("Connessione alla rete " + ssidvett[j] + "...");
             //WiFi.softAP(ssid, password);
             scegrete=true;
-            Serial.print("AP IP address: ");
-            Serial.println("Fatto");
+            Serial.print("Inserire la password:");
+            Connetti(ssidvett[j]);
           }
         }
+        
       Serial.read();
       Serial.read();
       Serial.read();
     }
         
-
         //IPAddress myIP = WiFi.softAPIP();
-        
-        //Serial.println(myIP);
         delay(1000);
         
       
   }  
+}
+void Connetti(String ssid){
+  Serial.read();
+  Serial.read();
+  Serial.read();
+  
+  bool apw = true;
+  String pw = "";
+  while(apw){
+    if(Serial.available()>0){ //MIO METODO D’AVAILABLE
+      pw = Serial.readStringUntil(';');
+      
+      apw=false;
+    }
+  }
+  Serial.println("La password inserita è: " + pw);
+  Serial.println("Rete d'area: " + ssid);
+  WiFi.begin(ssid, pw);
+  Serial.print("Connessione in corso");
+  int k = 50;
+  while (WiFi.status() != WL_CONNECTED&&k>0)
+  {
+    delay(500);
+    k--;
+    Serial.print(".");
+  }
+  Serial.println();
+  delay(500);
+  if(WiFi.status() != WL_CONNECTED){
+    Serial.print("n");
+  }
+  else{
+    //Serial.print("Connected, IP address: ");
+    
+    ssidconnesso = ssid;
+    Serial.print("s");
+    delay(500);
+    Serial.println(WiFi.localIP());
+  }
+  
+  Serial.read();
+  Serial.read();
+  Serial.read();
+}
+
+void ControllaConnessione(){
+  if (WiFi.status() != WL_CONNECTED)
+  {
+    Serial.print("Il sensore non è connesso");        
+  }
+  else{
+    Serial.print("Il sensore è connesso alla rete " + ssidconnesso);        
+  }
 }
 
 //bool ESP8266WiFiSTAClass::isConnected() {
