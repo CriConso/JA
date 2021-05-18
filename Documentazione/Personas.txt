@@ -1,10 +1,18 @@
 Personas:
 
-Un cliente che non ha intenzione di spendere troppo per un sistema avanzato e quindi opta per uno più economico,
-minimo requisito richiesto è che il cliente debba avere un minimo di pazienza per utilizzare il programma per
-un dispositivo in parte manuale (essendo che una volta verificato il bisogno il cliente debba risolverlo manualmente),
-attraverso l'applicazione facile da utilizzare e i dispositivi collegati facili da trasportare piccoli e compatti.
-Perfetto per quelle abitazioni ancora di vecchia generazione non completamente o a volte per niente smart che 
-hanno bisogno di un dispositivo che possa in parte sostituire un moderno termostato.
-Date le dimensioni ridotte e i pochi cavi da collegare risulta facile da trasportare anche per luoghi di villeggiatura.
-Per esempio baite, case vacanza, bungalow.
+Prototipo cliente1:
+Cliente che non ha intenzione di spendere troppo per un sistema avanzato e quindi opta per un dispositivo facile da usare,
+deve avere un minimo di capacità nell'utilizzare il software e deve avere pazienza dato che il sistema non è automatico.
+
+Prototipo cliente2:
+Uno studente che prende in affitto una casa non di ultima generazione che è poco o per nulla smart, per persone che si sono
+appena trasferite e non hanno in casa un termostato e che quindi principalmente per un fattore economico e di spazio preferiscono 
+optare per un dispositivo facile da istallare, leggero da trasportare e da gestire tramite il software.
+
+Prototipo cliente3:
+Una famiglia/gruppo di amici che in vacanza affitta una baita, casetta, bungalow ... per il periodo di villeggiatura sceglie
+il nostro prodotto per gestire la temperatura dell'abitazione che magari non viene rinnovata dai proprietari dato che viene 
+affittata solo per un breve periodo dell'anno.
+
+Inoltre il dispositivo affre altre opzioni riguardo la gestione della temperatura e per questo potrebbe essere
+utilizzato per altri scopi.
