@@ -1,0 +1,18 @@
+Personas:
+
+Prototipo cliente1:
+Cliente che non ha intenzione di spendere troppo per un sistema avanzato e quindi opta per un dispositivo facile da usare,
+deve avere un minimo di capacità nell'utilizzare il software e deve avere pazienza dato che il sistema non è automatico.
+
+Prototipo cliente2:
+Uno studente che prende in affitto una casa non di ultima generazione che è poco o per nulla smart, per persone che si sono
+appena trasferite e non hanno in casa un termostato e che quindi principalmente per un fattore economico e di spazio preferiscono 
+optare per un dispositivo facile da istallare, leggero da trasportare e da gestire tramite il software.
+
+Prototipo cliente3:
+Una famiglia/gruppo di amici che in vacanza affitta una baita, casetta, bungalow ... per il periodo di villeggiatura sceglie
+il nostro prodotto per gestire la temperatura dell'abitazione che magari non viene rinnovata dai proprietari dato che viene 
+affittata solo per un breve periodo dell'anno.
+
+Inoltre il dispositivo affre altre opzioni riguardo la gestione della temperatura e per questo potrebbe essere
+utilizzato per altri scopi.

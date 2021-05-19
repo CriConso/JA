@@ -1,2 +1,0 @@
-CASI D’USO
-•	 Nel caso questi valori siano troppo sfalzati ti avvisa tramite una mail. 
