@@ -3,22 +3,36 @@
     The API is almost the same as with the WiFi Shield library,
     the most obvious difference being the different file you need to include:
 */
-#include "ESP8266WiFi.h"
+#include <ESP8266WiFi.h>
+#include <ESP8266WebServer.h>
+#include <WiFiUDP.h>
+#include <EEPROM.h>
 
 String retiinfovett[10];
 String ssidvett[10];
 String ssidconnesso;
+ESP8266WebServer server;
+String scritta="FUNZIONA!";
+String nomerete,pw;
+char packetBuffer[UDP_TX_PACKET_MAX_SIZE];
+WiFiUDP UDP;
+
 void setup() {
   Serial.begin(115200);
-  Serial.println("Setup starts - v. 0.7");
+  EEPROM.begin(512);
+  Serial.println("Setup iniziato - v. 0.8");
+  if(char(EEPROM.read(0x0F))=='1'){
+    leggi();
+  }
+  
+  
   // Set WiFi to station mode and disconnect from an AP if it was previously connected
-//  if(WiFi.status() != WL_CONNECTED){
-//    
-//  }
+  //if(WiFi.status() != WL_CONNECTED){
+  //  }
   WiFi.mode(WIFI_STA);
   delay(100);
-
-  Serial.println("Setup done");
+  Serial.println("Setup concluso");
+  
 }
 
 void loop() {
@@ -30,14 +44,80 @@ void loop() {
     letto = Serial.read();
     if(letto == "a"){ //SCANERIZZAZIONE DELLE RETI D’AREA
       Scannerizzazione();
+      
     }else if(letto == "b"){ //CONTROLLO CONNESIONE
-      Serial.println("Controllo Connessione");
+      //Serial.println("Controllo Connessione");
       ControllaConnessione();
     }else if(letto == "c"){ //DISCONNETTI SE CONNESSO
       Serial.println("Mi disconnetto");
       WiFi.disconnect();
+    }else if(letto == "l"){ 
+      leggi();
     }
   }
+  if (WiFi.status() == WL_CONNECTED)
+    {
+      server.handleClient();
+      int packetSize = UDP.parsePacket();
+      if(packetSize)
+        {
+          UDP.read(packetBuffer,UDP_TX_PACKET_MAX_SIZE);
+          Serial.println("Contents:");          
+          Serial.println(packetBuffer); //first packet
+          
+          if(packetBuffer[0] == 'b'){ 
+            Serial.println("INVIO RISPOSTA IN CORSO...");
+            UDP.beginPacket("192.168.1.8", 11000);
+            UDP.write("s");
+            UDP.endPacket();
+            delay(1000);
+            Serial.println("Pacchetto UDP inviato");
+          }  
+        } 
+        
+    }       
+    
+}
+
+void salva(String nome, String pw){
+  for(int i=1;i<nome.length();i++)
+  {
+    EEPROM.write(0x0F+i, nome[i]); //Write one by one with starting address of 0x0F
+  }
+  EEPROM.commit();
+  for(int j=nome.length()+1;j<pw.length();j++)
+  {
+    EEPROM.write(0x0F+j, pw[j]); //Write one by one with starting address of 0x0F
+  }
+  EEPROM.commit();
+  EEPROM.write(0x0F, '1');
+  EEPROM.write(0x0F+nome.length(), ';');
+  EEPROM.write(0x0F+pw.length(), ';');
+  EEPROM.commit();
+
+  Serial.println("Credenziali salvate");
+}
+
+void leggi(){
+  int i=1;
+  bool sep=false;
+    while(sep){
+      nomerete = nomerete + char(EEPROM.read(0x0F+i));
+      i++;
+      if(char(EEPROM.read(0x0F+i))==';'){
+        sep=false;
+      }
+    }
+    Serial.print(nomerete);
+    sep=false;
+    while(sep){
+      pw = pw + char(EEPROM.read(0x0F+i));
+      i++;
+      if(char(EEPROM.read(0x0F+i))==';'){
+        sep=false;
+      }
+    }
+    Serial.print(pw);
 }
 
 void Scannerizzazione(){
@@ -142,6 +222,9 @@ void Connetti(String ssid){
     Serial.print("s");
     delay(500);
     Serial.println(WiFi.localIP());
+    salva(ssid,pw);
+    ImpostaServer();
+    
   }
   
   Serial.read();
@@ -149,13 +232,39 @@ void Connetti(String ssid){
   Serial.read();
 }
 
+
+void ImpostaServer(){
+    server.on("/",handleIndex);
+    server.on("/update",handleUpdate);
+    server.begin(80);
+    if(UDP.begin(82) == 1)
+      {
+        Serial.println("s");
+      }
+    else{
+        Serial.println("n");
+      }
+}
+
+
+void handleIndex(){
+  server.send(200,"text/plain",scritta);
+}
+
+void handleUpdate(){
+  scritta = server.arg("value");
+  Serial.println(scritta);
+  server.send(200,"text/plain","Aggiornato");
+}
+
+
 void ControllaConnessione(){
   if (WiFi.status() != WL_CONNECTED)
   {
-    Serial.print("Il sensore non è connesso");        
+    Serial.print("n");        
   }
   else{
-    Serial.print("Il sensore è connesso alla rete " + ssidconnesso);        
+    Serial.print("s");        
   }
 }
 

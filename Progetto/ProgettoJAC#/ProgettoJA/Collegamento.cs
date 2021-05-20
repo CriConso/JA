@@ -6,9 +6,12 @@ using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace ProgettoJA
 {
@@ -18,8 +21,11 @@ namespace ProgettoJA
         string[] porte;
         bool inizioric = true;
         bool fineric = false;
+        bool contrconn = false;
         public SerialPort P;
         int cont, i;
+        UdpClient receivingUdpClient = new UdpClient(11000);
+        IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
         public Collegamento()
         {
             InitializeComponent();
@@ -73,7 +79,7 @@ namespace ProgettoJA
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Inserimento_password I = new Inserimento_password(vettSSID, listView1.FocusedItem.Index, this);
+            Inserimento_password I = new Inserimento_password(vettSSID, listView1.FocusedItem.Index, this);        
             I.Show();
         }
 
@@ -85,11 +91,56 @@ namespace ProgettoJA
 
         private void button3_Click(object sender, EventArgs e)
         {
-            inizioric = false;
+            bool ricevi = true; ;
+            UdpClient udpClient = new UdpClient("192.168.1.24", 82);
+            Byte[] sendBytes = Encoding.ASCII.GetBytes("b");
+            udpClient.Send(sendBytes, sendBytes.Length);
+            while (ricevi)
+            {
+                Byte[] receiveBytes = receivingUdpClient.Receive(ref RemoteIpEndPoint);
+                textBox1.Text += string.Join(" ", receiveBytes);
+                string s = System.Text.Encoding.UTF8.GetString(receiveBytes);
+                MessageBox.Show(s);
+                if (s=="s")
+                {
+                    label4.Text = "Connesso alla rete";
+                    label4.ForeColor = Color.Green;
+                    button4.Visible = true;
+                    ricevi = false;
+                }
+                //Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate { }));
+            }
+            /*inizioric = false;
             fineric = true;
-            P.Write("b");
-            label4.Text = "Connesso alla rete " + listView1.FocusedItem;
-            label4.ForeColor = Color.Green;
+            contrconn = true;
+            P.Write("b");*/
+        }
+
+        private void Collegamento_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            P.Write("c");
+            button4.Visible = false;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            UdpClient udpClient = new UdpClient("192.168.1.24", 82);
+            Byte[] sendBytes = Encoding.ASCII.GetBytes("b");
+            udpClient.Send(sendBytes, sendBytes.Length);
+        }
+
+        private void Send(string remoteIp, int remotePort, string message)
+        {
+            remoteIp = "192.168.1.24";
+            remotePort = 82;
+            UdpClient udpClient = new UdpClient(remoteIp, remotePort);
+            Byte[] sendBytes = Encoding.ASCII.GetBytes(message);
+            udpClient.Send(sendBytes, sendBytes.Length);
         }
 
         private void AppendTextInvoke(TextBox t, String Text)
@@ -120,13 +171,22 @@ namespace ProgettoJA
                     }
                 }
                 if (Text == "s")
-                {
-                    label4.Text = "Connesso alla rete " + listView1.FocusedItem;
+                {                    
+                    label4.Text = "Connesso alla rete";
                     label4.ForeColor = Color.Green;
+                    button4.Visible = true;
                 }
-                else if (Text=="n")
+                else if (Text=="n" && !contrconn)
                 {
                     MessageBox.Show("Password errata");
+                }
+                if (Text=="n"&& contrconn)
+                {
+                    label4.Text = "Non connesso alla rete";
+                    label4.ForeColor = Color.Red;
+                    contrconn = false;
+                    inizioric = true;
+                    fineric = false;
                 }
                 t.AppendText(Text + ";");
             }
