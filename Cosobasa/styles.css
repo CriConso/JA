@@ -17,6 +17,11 @@ body {
   margin-left:3em ;
  
 }
+.div-spazio {
+  height: 28em;
+  background-color: rgb(255, 252, 221);
+  width: 100%;
+}
 
 ul {
   list-style-type: none;
@@ -71,4 +76,39 @@ margin-left:75px ;
 h4{
   font-family: Georgia, 'Times New Roman', Times, serif;
   margin-left:125px ;
+}
+h{
+  font-family:Bungee-Regular ;
+  
+}
+
+.img-team13{
+  margin-top: 50px;
+  align-items:center ;
+  border-radius: 50%;
+  width: 200px;
+  border: 8px solid rgb(187, 187, 187);
+
+}
+.img-team24{
+
+  align-items:center ;
+  border-radius: 50%;
+  width: 200px;
+  border: 8px solid rgb(187, 187, 187);
+
+}
+
+p{
+  text-align: center;
+}
+
+
+#team{
+margin-top: 2em;
+font-size: 50px;
+}
+.fontTeam{
+  font-family:Bungee-Regular ;
+
 }
