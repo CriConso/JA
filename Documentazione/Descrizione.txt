@@ -9,7 +9,7 @@ Leader-> Baccaglini Christian
 Mediatore  -> Saetti Elia
 
 Descrizione problema:
-Ho un sistema sistema di riscaldamento antiquato o assente del tutto.
+Ho un sistema sistema di gestione del riscaldamento antiquato o assente del tutto.
 Non ho intenzione di spendere troppi soldi.
 Desidero rimuovere e spostare facilmente il mio dispositivo.
 Non ho la possibilità di misurare la temperatura in un stanza.
