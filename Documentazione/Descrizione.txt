@@ -1,3 +1,4 @@
+  
 Nome progetto:
 CoSoBaSa
 
@@ -8,13 +9,29 @@ Leader-> Baccaglini Christian
 Mediatore  -> Saetti Elia
 
 Descrizione problema:
-Verificare in quale situazione sia necessario accendere il termosifone,
- verificarne la temperatura e umidità ideale.
+Ho un sistema sistema di riscaldamento antiquato o assente del tutto.
+Non ho intenzione di spendere troppi soldi.
+Desidero rimuovere e spostare facilmente il mio dispositivo.
+Non ho la possibilità di misurare la temperatura in un stanza.
+Non ho la possibilità di misurare l'umidità in un stanza.
+Non riesco a capire quando ho bisogno di accendere il calorifero.
+Non so quando devo spegnere il calorifero per evitrare di sprecare denaro sul riscaldamento.
+Non so quando è il tempo giusto di aggiungere acqua all'umidificatore.
 
 Descrizione soluzione:
-Sensore d'umidità che controlla se l'umidificatore del calorifero è pieno d'acqua,
- in più se è necessario accendere il calorifero controllando la differenza di temperatura
- tra il luogo all'opposto al calorifero e l'altro davanti alla finestra.
+Il dispositivo permette:
+Di individuare i valori di umidità nell'aria e la temperatura dell'ambiente.
+Pratico e facile da trasportare.
+Rispetto all'installazione di un termostato risulta più economico.
+Riesce a indicare all'utente tramite una mail quando per lui è meglio accendere o spegnere il riscaldamento.
+Informa il cliente dell'assenza di acqua nell'umidificatore.
 
-Elenco prodotti:
-Sensore umidità - Modulo wireless
+
+Elenco prodotti/materiali:
+
+	- 2xSensore umidità/temperatura
+	- 2xModulo wireless ESP8266 v01 
+	- Comunicatore Seriale FTDI 232
+	- Cavi
+	- Breadboard
+	- Arduino	
