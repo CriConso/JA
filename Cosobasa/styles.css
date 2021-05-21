@@ -12,6 +12,14 @@ body {
   width: 100%;
 }
 
+.div-sopra2{
+  margin: 0;
+  height: 17em;
+  margin-top: 1em;
+  background-color: rgba(250, 179, 87, 0.288);
+  width: 100%;
+}
+
 .div-spazio {
   height: 28em;
   background-color: rgb(255, 252, 221);
@@ -30,6 +38,35 @@ font-size: 25px;
 
 }
 #testoMain-2{
+ 
+text-align: center;
+font-family:Hei Reina;
+font-size: 40px;
+
+}
+
+#testoMain-3{
+  font-family:Rougant;
+color: rgba(0, 0, 0, 0.651);
+text-align: center;
+font-size: 25px;
+
+}
+#testoMain-4{
+ 
+text-align: center;
+font-family:Hei Reina;
+font-size: 40px;
+
+}
+#testoMain-5{
+  font-family:Rougant;
+color: rgba(0, 0, 0, 0.651);
+text-align: center;
+font-size: 25px;
+
+}
+#testoMain-6{
  
 text-align: center;
 font-family:Hei Reina;
@@ -128,7 +165,6 @@ font-family:Rougant;
 margin-top: 2.5em;
 font-size: 40px;
 color: rgba(0, 0, 0, 0.692);
-
 }
 
 #testoTeamNomi{
@@ -136,3 +172,17 @@ color: rgba(0, 0, 0, 0.692);
 font-family:Hei Reina ;
 font-size: 50px;
 }
+
+#team{
+  font-family:Rougant;
+  margin-top: 2.5em;
+  font-size: 40px;
+  color: rgba(0, 0, 0, 0.692);
+  }
+  
+  #testoNews{
+    margin-top: 2em;
+    font-family:Rougant;
+    font-size: 50px;
+    color: rgba(0, 0, 0, 0.692);
+  }
