@@ -100,7 +100,7 @@ namespace ProgettoJA
                 Byte[] receiveBytes = receivingUdpClient.Receive(ref RemoteIpEndPoint);
                 textBox1.Text += string.Join(" ", receiveBytes);
                 string s = System.Text.Encoding.UTF8.GetString(receiveBytes);
-                MessageBox.Show(s);
+                //MessageBox.Show(s);
                 if (s=="s")
                 {
                     label4.Text = "Connesso alla rete";

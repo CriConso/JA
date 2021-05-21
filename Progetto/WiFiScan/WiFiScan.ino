@@ -7,6 +7,11 @@
 #include <ESP8266WebServer.h>
 #include <WiFiUDP.h>
 #include <EEPROM.h>
+#include <dht11.h>
+#define DHT11PIN 2
+dht11 DHT11;
+float temperatura=0;
+float umidita=0;
 
 String retiinfovett[10];
 String ssidvett[10];
@@ -29,6 +34,9 @@ void setup() {
   // Set WiFi to station mode and disconnect from an AP if it was previously connected
   //if(WiFi.status() != WL_CONNECTED){
   //  }
+  for(int i=0;i<10;i++){
+    ssidvett[i]=" ";
+  }
   WiFi.mode(WIFI_STA);
   delay(100);
   Serial.println("Setup concluso");
@@ -36,9 +44,8 @@ void setup() {
 }
 
 void loop() {
-  for(int i=0;i<10;i++){
-    ssidvett[i]=" ";
-  }
+  
+  
   if(Serial.available()>0){ //MIO METODO D’AVAILABLE
     String letto;
     letto = Serial.read();
@@ -53,6 +60,8 @@ void loop() {
       WiFi.disconnect();
     }else if(letto == "l"){ 
       leggi();
+    }else if(letto == "d"){ 
+      Misura();
     }
   }
   if (WiFi.status() == WL_CONNECTED)
@@ -72,6 +81,29 @@ void loop() {
             UDP.endPacket();
             delay(1000);
             Serial.println("Pacchetto UDP inviato");
+          }
+          else if(packetBuffer[0] == 'd'){ 
+            Serial.println("INVIO RISPOSTA IN CORSO...");
+            UDP.beginPacket("192.168.1.8", 11001);
+            Misura();
+//            uint8_t buffer[4];
+//            ::memcpy(buffer, &temperatura, 4);
+            String ST = String(temperatura);
+            String SU = String(umidita);
+            UDP.write(ST[0]);
+            UDP.write(ST[1]);
+            UDP.write(ST[2]);
+            UDP.write(ST[3]);
+            UDP.write(ST[4]);
+            UDP.write(";");
+            UDP.write(SU[0]);
+            UDP.write(SU[1]);
+            UDP.write(SU[2]);
+            UDP.write(SU[3]);
+            UDP.write(SU[4]);
+            UDP.endPacket();
+            delay(1000);
+            Serial.println("Pacchetto UDP inviato");
           }  
         } 
         
@@ -80,7 +112,10 @@ void loop() {
 }
 
 void salva(String nome, String pw){
-  for(int i=1;i<nome.length();i++)
+  EEPROM.write(0x0F+1, nome.length());
+  EEPROM.write(0x0F+2, pw.length());
+  Serial.println("Nome: " + nome + "\n pw: " + pw); 
+  for(int i=3;i<nome.length();i++)
   {
     EEPROM.write(0x0F+i, nome[i]); //Write one by one with starting address of 0x0F
   }
@@ -101,20 +136,21 @@ void salva(String nome, String pw){
 void leggi(){
   int i=1;
   bool sep=false;
-    while(sep){
+  Serial.println(char(EEPROM.read(0x0F)));
+    while(!sep){
       nomerete = nomerete + char(EEPROM.read(0x0F+i));
       i++;
       if(char(EEPROM.read(0x0F+i))==';'){
-        sep=false;
+        sep=true;
       }
     }
     Serial.print(nomerete);
     sep=false;
-    while(sep){
+    while(!sep){
       pw = pw + char(EEPROM.read(0x0F+i));
       i++;
       if(char(EEPROM.read(0x0F+i))==';'){
-        sep=false;
+        sep=true;
       }
     }
     Serial.print(pw);
@@ -271,3 +307,17 @@ void ControllaConnessione(){
 //bool ESP8266WiFiSTAClass::isConnected() {
 //    return (status() == WL_CONNECTED);
 //}
+
+
+
+void Misura(){
+
+   uint8_t chk = DHT11.read(DHT11PIN);
+   temperatura = DHT11.temperature, DEC;
+   umidita = DHT11.humidity, DEC;
+   Serial.println(temperatura);
+   Serial.println(umidita);
+//  Serial.print(" *C, ");
+//  Serial.print((float)umidita); 
+//  Serial.println(" RH%");
+}
