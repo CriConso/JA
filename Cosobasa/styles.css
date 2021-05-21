@@ -6,7 +6,7 @@ body {
 
 .div-sopra {
   margin: 0;
-  height: 23em;
+  height: 25em;
   margin-top: 1em;
   background-color: rgba(250, 179, 87, 0.288);
   width: 100%;
@@ -19,60 +19,63 @@ body {
   background-color: rgba(250, 179, 87, 0.288);
   width: 100%;
 }
-
+.div-sopra3 {
+  margin: 0;
+  height: 23em;
+  margin-top: 1em;
+  background-color: rgba(250, 179, 87, 0.288);
+  width: 100%;
+}
 .div-spazio {
   height: 28em;
   background-color: rgb(255, 252, 221);
   width: 100%;
-}
-#testoMain{
- margin: 0 auto;
-
 }
 
 #testoMain-1{
   font-family:Rougant;
 color: rgba(0, 0, 0, 0.651);
 text-align: center;
-font-size: 25px;
+font-size: 28px;
 
 }
 #testoMain-2{
- 
+margin-top: 0;
 text-align: center;
 font-family:Hei Reina;
-font-size: 40px;
+font-size: 50px;
 
 }
 
-#testoMain-3{
-  font-family:Rougant;
-color: rgba(0, 0, 0, 0.651);
-text-align: center;
-font-size: 25px;
-
-}
-#testoMain-4{
+  #testoMain-3{
+    font-family:Rougant;
+  color: rgba(0, 0, 0, 0.651);
+  text-align: center;
+  font-size: 25px;
+  
+  }
+  #testoMain-4{
  
-text-align: center;
-font-family:Hei Reina;
-font-size: 40px;
+    text-align: center;
+    font-family:Hei Reina;
+    font-size: 40px;
+    
+    }
+    #testoMain-5{
+      font-family:Rougant;
+    color: rgba(0, 0, 0, 0.651);
+    text-align: center;
+    font-size: 25px;
+    
+    }
+    #testoMain-6{
+     
+    text-align: center;
+    font-family:Hei Reina;
+    font-size: 40px;
+    
+    }
 
-}
-#testoMain-5{
-  font-family:Rougant;
-color: rgba(0, 0, 0, 0.651);
-text-align: center;
-font-size: 25px;
-
-}
-#testoMain-6{
- 
-text-align: center;
-font-family:Hei Reina;
-font-size: 40px;
-
-}
 #imgMain{
 width: 200px;
 height: 200px;
@@ -162,8 +165,8 @@ p{
 
 #team{
 font-family:Rougant;
-margin-top: 2.5em;
-font-size: 40px;
+margin-top: 2em;
+font-size: 50px;
 color: rgba(0, 0, 0, 0.692);
 }
 
@@ -173,12 +176,6 @@ font-family:Hei Reina ;
 font-size: 50px;
 }
 
-#team{
-  font-family:Rougant;
-  margin-top: 2.5em;
-  font-size: 40px;
-  color: rgba(0, 0, 0, 0.692);
-  }
   
   #testoNews{
     margin-top: 2em;
@@ -186,3 +183,45 @@ font-size: 50px;
     font-size: 50px;
     color: rgba(0, 0, 0, 0.692);
   }
+  #testoContattaci{
+  margin-top:2em ;
+font-family:Rougant ;
+font-size: 50px;
+text-align: center;
+color: rgba(0, 0, 0, 0.692);
+}
+
+#imgLogoTwitter{
+  margin-top: 3em;
+  width: 200px;
+  height: 160px;
+
+}
+#imgLogoInstagram{
+  margin-top: 4em;
+  width: 200px;
+  height: 200px;
+}
+#imgLogoFacebook{
+  margin-top: 0;
+  width: 220px;
+  height: 220px;
+}
+.testoLoghi{
+margin-top: 20px;
+font-family:Rougant ;
+font-size:18px;
+text-align: center;
+color: rgba(0, 0, 0, 0.692);
+
+}
+#testoNews{
+  margin-top: 2em;
+  font-family:Rougant;
+  font-size: 50px;
+  color: rgba(0, 0, 0, 0.692);
+}
+.fontNav{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  font-size: 15px;
+}
