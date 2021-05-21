@@ -1,0 +1,19 @@
+-INIZIO-
+SITUAZIONE: Il cliente sta cercando un sistema che gli permetta di monitorare la temperatura in una stanza
+EMOZIONI: Il cliente è annoiato al pensiero di dover cercare un app che faccia al suo caso
+
+-RICERCA-
+SITUAZIONE: Il cliente trova l'applicazione che fa al caso suo
+EMOZIONI: Il cliente è felice al fatto di aver finito la ricerca
+
+-UTILIZZO-
+SITUAZIONE: Il cliente deve capire come utilizzare il sistema
+EMOZIONI: Il cliente è felice poichè facile da installare, allo stesso tempo ne è annoiato
+
+-RISULTATO-
+SITUAZIONE: Il cliente ha installato il sistema
+EMOZIONI: Il cliente è felice di aver finito di installare il sistema e poter controllare la temperatura della camera
+
+-CONDIZIONI SUCCESSIVE-
+SITUAZIONE: Nel caso il termostato sia pieno arriverà una mail al cliente
+EMOZIONI: Felice di essere stato avvisato autonomamente 

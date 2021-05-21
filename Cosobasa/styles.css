@@ -1,0 +1,138 @@
+body {
+   margin:0;
+    background-color:rgb(255, 246, 198);
+
+}
+
+.div-sopra {
+  margin: 0;
+  height: 23em;
+  margin-top: 1em;
+  background-color: rgba(250, 179, 87, 0.288);
+  width: 100%;
+}
+
+.div-spazio {
+  height: 28em;
+  background-color: rgb(255, 252, 221);
+  width: 100%;
+}
+#testoMain{
+ margin: 0 auto;
+
+}
+
+#testoMain-1{
+  font-family:Rougant;
+color: rgba(0, 0, 0, 0.651);
+text-align: center;
+font-size: 25px;
+
+}
+#testoMain-2{
+ 
+text-align: center;
+font-family:Hei Reina;
+font-size: 40px;
+
+}
+#imgMain{
+width: 200px;
+height: 200px;
+margin-left: 200px;
+display: inline-block;
+}
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding:0;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  font-size: 20px;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: whitesmoke;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: rgb(104, 104, 103);
+}
+
+.active {
+  background-color:rgb(250, 200, 90);
+}
+
+img{
+  margin-top: 5em;
+  width: 400px;
+  display: block;
+margin-left: auto;
+margin-right: auto;
+}
+
+.img-logo{
+  margin-top: 50px;
+  width: 60px;
+}
+
+h1{
+  margin-top: 2em;
+}
+h3{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+margin-left:75px ;
+}
+h4{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-left:125px ;
+}
+
+.img-team13{
+  margin-top: 10px;
+  align-items:center ;
+  border-radius: 50%;
+  width: 200px;
+  border: 8px solid rgb(187, 187, 187);
+
+}
+.img-team24{
+
+  align-items:center ;
+  border-radius: 50%;
+  width: 200px;
+  border: 8px solid rgb(187, 187, 187);
+
+}
+
+p{
+  text-align: center;
+}
+
+
+#team{
+font-family:Rougant;
+margin-top: 2.5em;
+font-size: 40px;
+color: rgba(0, 0, 0, 0.692);
+
+}
+
+#testoTeamNomi{
+  margin-top:20px ;
+font-family:Hei Reina ;
+font-size: 50px;
+}
