@@ -1,4 +1,17 @@
+
 @font-face {
-    font-family:"Bungee-Regular" ;
-    src: url("font/Bungee-Regular.otf");
+    font-family:"Hei Reina" ;
+    src: url("font/Hei\ Reina.ttf");
+}
+@font-face {
+    font-family:"Tik Tok" ;
+    src: url("font/Tiktok.otf");
+}
+@font-face {
+    font-family:"VEZTRO" ;
+    src: url("font/VEZTRO.ttf");
+}
+@font-face {
+    font-family:"Rougant" ;
+    src: url("font/Rougant_PERSONAL_USE_ONLY.otf");
 }

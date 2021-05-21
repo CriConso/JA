@@ -1,27 +1,48 @@
 body {
-    margin:0;
+   margin:0;
     background-color:rgb(255, 246, 198);
 
 }
 
 .div-sopra {
   margin: 0;
-  margin-top: -3.5em;
-  height: 18em;
-  background-color: rgb(247, 191, 142);
+  height: 23em;
+  margin-top: 1em;
+  background-color: rgba(250, 179, 87, 0.288);
   width: 100%;
 }
-.div-centro {
 
-  margin-top: 2em;
-  margin-left:3em ;
- 
-}
 .div-spazio {
   height: 28em;
   background-color: rgb(255, 252, 221);
   width: 100%;
 }
+#testoMain{
+ margin: 0 auto;
+
+}
+
+#testoMain-1{
+  font-family:Rougant;
+color: rgba(0, 0, 0, 0.651);
+text-align: center;
+font-size: 25px;
+
+}
+#testoMain-2{
+ 
+text-align: center;
+font-family:Hei Reina;
+font-size: 40px;
+
+}
+#imgMain{
+width: 200px;
+height: 200px;
+margin-left: 200px;
+display: inline-block;
+}
+
 
 ul {
   list-style-type: none;
@@ -48,7 +69,7 @@ li a {
 }
 
 li a:hover:not(.active) {
-  background-color: rgb(104, 103, 103);
+  background-color: rgb(104, 104, 103);
 }
 
 .active {
@@ -62,7 +83,9 @@ img{
 margin-left: auto;
 margin-right: auto;
 }
+
 .img-logo{
+  margin-top: 50px;
   width: 60px;
 }
 
@@ -77,13 +100,9 @@ h4{
   font-family: Georgia, 'Times New Roman', Times, serif;
   margin-left:125px ;
 }
-h{
-  font-family:Bungee-Regular ;
-  
-}
 
 .img-team13{
-  margin-top: 50px;
+  margin-top: 10px;
   align-items:center ;
   border-radius: 50%;
   width: 200px;
@@ -105,10 +124,15 @@ p{
 
 
 #team{
-margin-top: 2em;
-font-size: 50px;
-}
-.fontTeam{
-  font-family:Bungee-Regular ;
+font-family:Rougant;
+margin-top: 2.5em;
+font-size: 40px;
+color: rgba(0, 0, 0, 0.692);
 
+}
+
+#testoTeamNomi{
+  margin-top:20px ;
+font-family:Hei Reina ;
+font-size: 50px;
 }
