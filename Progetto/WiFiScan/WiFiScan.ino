@@ -13,6 +13,8 @@ dht11 DHT11;
 float temperatura=0;
 float umidita=0;
 
+IPAddress ipRemoto;
+String ipRemotoS;
 String retiinfovett[10];
 String ssidvett[10];
 String ssidconnesso;
@@ -21,15 +23,20 @@ String scritta="FUNZIONA!";
 String nomerete,pw;
 char packetBuffer[UDP_TX_PACKET_MAX_SIZE];
 WiFiUDP UDP;
+IPAddress local_IP(192, 168, 1, 100);
+IPAddress gateway(192,168,1,1);
+IPAddress subnet(255,255,255,0);
 
 void setup() {
   Serial.begin(115200);
   EEPROM.begin(512);
   Serial.println("Setup iniziato - v. 0.8");
-  if(char(EEPROM.read(0x0F))=='1'){
+  if(char(EEPROM.read(0) == '1')){
     leggi();
   }
-  
+  if (!WiFi.config(local_IP, gateway, subnet)) {
+    Serial.println("STA Failed to configure");
+  }
   
   // Set WiFi to station mode and disconnect from an AP if it was previously connected
   //if(WiFi.status() != WL_CONNECTED){
@@ -37,7 +44,7 @@ void setup() {
   for(int i=0;i<10;i++){
     ssidvett[i]=" ";
   }
-  WiFi.mode(WIFI_STA);
+  //WiFi.mode(WIFI_STA);
   delay(100);
   Serial.println("Setup concluso");
   
@@ -60,8 +67,16 @@ void loop() {
       WiFi.disconnect();
     }else if(letto == "l"){ 
       leggi();
+    }else if(letto == "e"){ 
+      cleareeprom();
     }else if(letto == "d"){ 
       Misura();
+    }else if(letto == "s"){ 
+      Provascrivi();
+    }else if(letto == "q"){ 
+      Provaleggi();
+    }else if(letto == "i"){ 
+      Serial.print(WiFi.localIP());
     }
   }
   if (WiFi.status() == WL_CONNECTED)
@@ -74,9 +89,13 @@ void loop() {
           Serial.println("Contents:");          
           Serial.println(packetBuffer); //first packet
           
+          ipRemoto = UDP.remoteIP();
+          ipRemotoS = ipRemoto.toString();
+          Serial.println(ipRemotoS);
+          
           if(packetBuffer[0] == 'b'){ 
             Serial.println("INVIO RISPOSTA IN CORSO...");
-            UDP.beginPacket("192.168.1.8", 11000);
+            UDP.beginPacket(ipRemoto, 11000);
             UDP.write("s");
             UDP.endPacket();
             delay(1000);
@@ -84,7 +103,7 @@ void loop() {
           }
           else if(packetBuffer[0] == 'd'){ 
             Serial.println("INVIO RISPOSTA IN CORSO...");
-            UDP.beginPacket("192.168.1.8", 11001);
+            UDP.beginPacket(ipRemoto, 11001);
             Misura();
 //            uint8_t buffer[4];
 //            ::memcpy(buffer, &temperatura, 4);
@@ -111,23 +130,117 @@ void loop() {
     
 }
 
+void Provascrivi(){
+  bool apw = true;
+  String string = "";
+  int add=0;
+  while(apw){
+    if(Serial.available()>0){ //MIO METODO D’AVAILABLE
+      string = Serial.readStringUntil(';');
+      
+      apw=false;
+    }
+  }
+  Serial.println("Hai scritto: " + string);
+
+  for(int i=0;i<string.length();i++)
+  {
+
+    Serial.print(string.charAt(i));
+    Serial.println(add);
+    EEPROM.write(add, string.charAt(i)); //Write one by one with starting address of 0x0F
+    add++;
+  }
+  EEPROM.write(add,';');
+  EEPROM.commit();
+  Provaleggi();
+}
+
+void Provaleggi(){
+  int i=0;
+  int add=0;
+  bool sep=false;
+  Serial.println(char(EEPROM.read(add)));
+    while(!sep){
+      nomerete = nomerete + char(EEPROM.read(add+i));
+      //Serial.println("Valore letto: " + EEPROM.read(add+i));
+      i++;
+      if(char(EEPROM.read(add+i))==';'){
+        sep=true;
+        i++;
+      }
+    }
+    Serial.print(nomerete);
+    while(!sep){
+      nomerete = nomerete + char(EEPROM.read(add+i));
+      //Serial.println("Valore letto: " + EEPROM.read(add+i));
+      i++;
+      if(char(EEPROM.read(add+i))==';'){
+        sep=true;
+        i++;
+      }
+    }
+    Serial.print(nomerete);
+}
+
+void cleareeprom(){
+  for (int i = 0 ; i < 512 ; i++) {
+    EEPROM.write(i, 0);
+  }
+  EEPROM.commit();
+  Serial.println("Cancellato la memoria");
+}
+
 void salva(String nome, String pw){
-  EEPROM.write(0x0F+1, nome.length());
-  EEPROM.write(0x0F+2, pw.length());
-  Serial.println("Nome: " + nome + "\n pw: " + pw); 
-  for(int i=3;i<nome.length();i++)
+  
+  Serial.print("Nome: " + nome + "lunga: " + nome.length());
+  Serial.println("\npw: " + pw + "lunga: " + pw.length());
+  Serial.print("Scrivo ");
+  Serial.println(nome.length());
+  int add=0;
+  
+//  Serial.print("Scrivo " + nome.length());
+//  Serial.println(" a " + add);
+  add++;
+  
+  Serial.print("Scrivo ");
+  Serial.print((char)nome.length());
+  Serial.print(" a ");
+  Serial.println(add);
+  EEPROM.write(add, (char)nome.length());
+  add++;
+  EEPROM.write(add, (char)nome.length());
+  Serial.print("Scrivo ");
+  Serial.print((char)pw.length());
+  Serial.print(" a ");
+  Serial.println(add);
+  EEPROM.write(add, (char)pw.length()); 
+  add++;
+  EEPROM.write(add, ';');
+  add++;
+  for(int i=0;i<nome.length();i++)
   {
-    EEPROM.write(0x0F+i, nome[i]); //Write one by one with starting address of 0x0F
+    Serial.print("Scrivo ");
+    Serial.print(nome[i]);
+    Serial.print(" a ");
+    Serial.println(add);
+    EEPROM.write(add, nome[i]); 
+    add++;
   }
-  EEPROM.commit();
-  for(int j=nome.length()+1;j<pw.length();j++)
+  EEPROM.write(add, ';');
+  add++;
+  for(int j=0;j<pw.length();j++)
   {
-    EEPROM.write(0x0F+j, pw[j]); //Write one by one with starting address of 0x0F
+    Serial.print("Scrivo ");
+    Serial.print(pw[j]);
+    Serial.print(" a ");
+    Serial.println(add);
+    EEPROM.write(add, pw[j]); //Write one by one with starting address of 0x0F
+    add++;
   }
-  EEPROM.commit();
-  EEPROM.write(0x0F, '1');
-  EEPROM.write(0x0F+nome.length(), ';');
-  EEPROM.write(0x0F+pw.length(), ';');
+  EEPROM.write(0, '1');
+  
+  EEPROM.write(add, ';');
   EEPROM.commit();
 
   Serial.println("Credenziali salvate");
@@ -135,25 +248,51 @@ void salva(String nome, String pw){
 
 void leggi(){
   int i=1;
+  int add=0;
   bool sep=false;
-  Serial.println(char(EEPROM.read(0x0F)));
+  String num;
+  //Serial.println(char(EEPROM.read(add)));
+  
     while(!sep){
-      nomerete = nomerete + char(EEPROM.read(0x0F+i));
+      num = num + int(EEPROM.read(add+i)) + ", ";
+      Serial.print("Valore letto: ");
+      Serial.println(int(EEPROM.read(add+i)));
       i++;
-      if(char(EEPROM.read(0x0F+i))==';'){
+      if(char(EEPROM.read(add+i))==';'){
         sep=true;
+        i++;
       }
     }
-    Serial.print(nomerete);
+    Serial.print("I numeri sono: ");
+    Serial.println(num);
     sep=false;
     while(!sep){
-      pw = pw + char(EEPROM.read(0x0F+i));
+      nomerete = nomerete + char(EEPROM.read(add+i));
+      Serial.print("Valore letto: ");
+      Serial.println(char(EEPROM.read(add+i)));
       i++;
-      if(char(EEPROM.read(0x0F+i))==';'){
+      if(char(EEPROM.read(add+i))==';'){
+        sep=true;
+        i++;
+      }
+    }
+    Serial.print("Il nome è: ");
+    Serial.println(nomerete);
+    sep=false;
+    
+    while(!sep){
+      pw = pw + char(EEPROM.read(add+i));
+      Serial.print("Valore letto: ");
+      Serial.println(char(EEPROM.read(add+i)));
+      i++;
+      if(char(EEPROM.read(add+i))==';'){
         sep=true;
       }
     }
-    Serial.print(pw);
+    Serial.print("La password è: ");
+    Serial.println(pw);
+
+    ConncPw(nomerete, pw);
 }
 
 void Scannerizzazione(){
@@ -193,6 +332,9 @@ void Scannerizzazione(){
     while(!scegrete){  
       while(Serial.available()==0); //METODO D’AVAILABLE D’EMANUELE
       is=Serial.read();
+      if(is=="a"){
+       return; 
+      }      
       j=is.toInt()-1;
       if((j>n)||((int)j<48||(int)j>57)){
        Serial.println("is: "+is);
@@ -257,8 +399,46 @@ void Connetti(String ssid){
     ssidconnesso = ssid;
     Serial.print("s");
     delay(500);
-    Serial.println(WiFi.localIP());
+    Serial.print(WiFi.localIP());
+    delay(500);
     salva(ssid,pw);
+    ImpostaServer();
+    
+  }
+  
+  Serial.read();
+  Serial.read();
+  Serial.read();
+}
+
+void ConncPw(String nom, String pass){
+  Serial.read();
+  Serial.read();
+  Serial.read();
+  Serial.println("La password inserita è: " + pass);
+  Serial.println("Rete d'area: " + nom);
+  WiFi.begin(nom, pass);
+  Serial.print("Connessione in corso");
+  int k = 50;
+  while (WiFi.status() != WL_CONNECTED&&k>0)
+  {
+    delay(500);
+    k--;
+    Serial.print(".");
+  }
+  Serial.println();
+  delay(500);
+  if(WiFi.status() != WL_CONNECTED){
+    Serial.print("n");
+  }
+  else{
+    //Serial.print("Connected, IP address: ");
+    
+    ssidconnesso = nom;
+    Serial.print("s");
+    delay(500);
+    Serial.print(WiFi.localIP());
+    delay(500);
     ImpostaServer();
     
   }
@@ -295,8 +475,7 @@ void handleUpdate(){
 
 
 void ControllaConnessione(){
-  if (WiFi.status() != WL_CONNECTED)
-  {
+  if (WiFi.status() != WL_CONNECTED){
     Serial.print("n");        
   }
   else{

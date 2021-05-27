@@ -24,12 +24,24 @@ namespace ProgettoJA
         bool contrconn = false;
         public SerialPort P;
         int cont, i;
+        string ip;
         UdpClient receivingUdpClient = new UdpClient(11000);
         IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
-        public Collegamento()
+        CModulo M;
+        Form1 F;
+        public Collegamento(Form1 F, int numm)
         {
             InitializeComponent();
             i = 0;
+            this.F = F;
+            if (numm==1)
+            {
+                F.M1 = M;
+            }
+            else if(numm==2)
+            {
+                F.M2 = M;
+            }
             listView1.View = View.Details;
             // Allow the user to edit item text.
             listView1.LabelEdit = true;
@@ -92,7 +104,7 @@ namespace ProgettoJA
         private void button3_Click(object sender, EventArgs e)
         {
             bool ricevi = true; ;
-            UdpClient udpClient = new UdpClient("192.168.1.24", 82);
+            UdpClient udpClient = new UdpClient(M.getIP(), 82);
             Byte[] sendBytes = Encoding.ASCII.GetBytes("b");
             udpClient.Send(sendBytes, sendBytes.Length);
             while (ricevi)
@@ -129,20 +141,21 @@ namespace ProgettoJA
 
         private void button5_Click(object sender, EventArgs e)
         {
-            UdpClient udpClient = new UdpClient("192.168.1.24", 82);
+            UdpClient udpClient = new UdpClient(M.getIP(), 82);
             Byte[] sendBytes = Encoding.ASCII.GetBytes("b");
             udpClient.Send(sendBytes, sendBytes.Length);
         }
 
         private void Send(string remoteIp, int remotePort, string message)
         {
-            remoteIp = "192.168.1.24";
+            remoteIp = M.getIP();
             remotePort = 82;
             UdpClient udpClient = new UdpClient(remoteIp, remotePort);
             Byte[] sendBytes = Encoding.ASCII.GetBytes(message);
             udpClient.Send(sendBytes, sendBytes.Length);
         }
 
+        bool lgIP = false;
         private void AppendTextInvoke(TextBox t, String Text)
         {
             if (t.InvokeRequired)
@@ -175,6 +188,7 @@ namespace ProgettoJA
                     label4.Text = "Connesso alla rete";
                     label4.ForeColor = Color.Green;
                     button4.Visible = true;
+                    lgIP = true;
                 }
                 else if (Text=="n" && !contrconn)
                 {
@@ -187,6 +201,13 @@ namespace ProgettoJA
                     contrconn = false;
                     inizioric = true;
                     fineric = false;
+                }
+                if (lgIP&&Text!="s")
+                {
+                    lgIP = false;
+                    ip = Text;
+                    label5.Text += ip;
+                    M.setIP(ip);
                 }
                 t.AppendText(Text + ";");
             }
