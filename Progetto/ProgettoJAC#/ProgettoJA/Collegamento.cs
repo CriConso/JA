@@ -123,6 +123,7 @@ namespace ProgettoJA
                     label4.Text = "Connesso alla rete";
                     label4.ForeColor = Color.Green;
                     button4.Visible = true;
+                    M.setConn();
                     ricevi = false;
                 }
                 //Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate { }));
