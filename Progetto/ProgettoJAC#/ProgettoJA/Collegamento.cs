@@ -9,9 +9,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Threading;
+using Timer = System.Threading.Timer;
 
 namespace ProgettoJA
 {
@@ -163,6 +165,12 @@ namespace ProgettoJA
         }
 
         bool lgIP = false;
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+        }
+
         private void AppendTextInvoke(TextBox t, String Text)
         {
             if (t.InvokeRequired)

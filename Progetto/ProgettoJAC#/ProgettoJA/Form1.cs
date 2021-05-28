@@ -223,7 +223,7 @@ namespace ProgettoJA
             else if (umidità < 16 && umidità > 0)
             {
                 pictureBox3.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiPila\pilaLVL1.png";
-                pictureBox3.ImageLocation = "https://cdn.discordapp.com/attachments/699741150256431164/847892762846429194/pila_2.png";
+                //pictureBox3.ImageLocation = "https://cdn.discordapp.com/attachments/699741150256431164/847892762846429194/pila_2.png";
             }
             else if (umidità == 0)
             {

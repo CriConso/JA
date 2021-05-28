@@ -63,7 +63,7 @@ namespace ProgettoJA.Properties {
         /// <summary>
         ///   Cerca una stringa localizzata simile a 1
         ///1;192.168.1.100
-        ///0;.
+        ///1;192.168.1.101.
         /// </summary>
         internal static string IPMODULI {
             get {
@@ -77,16 +77,6 @@ namespace ProgettoJA.Properties {
         internal static System.Drawing.Bitmap pilaAssenzaSegnale {
             get {
                 object obj = ResourceManager.GetObject("pilaAssenzaSegnale", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pilaLVL6 {
-            get {
-                object obj = ResourceManager.GetObject("pilaLVL6", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -248,6 +249,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = global::ProgettoJA.Properties.Resources.pilaAssenzaSegnale;
+            this.pictureBox3.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.InitialImage")));
             this.pictureBox3.Location = new System.Drawing.Point(74, 219);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(58, 136);
@@ -258,7 +260,6 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = global::ProgettoJA.Properties.Resources.pilaAssenzaSegnale;
-            this.pictureBox4.InitialImage = global::ProgettoJA.Properties.Resources.pilaAssenzaSegnale;
             this.pictureBox4.Location = new System.Drawing.Point(294, 219);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(58, 136);
@@ -269,7 +270,6 @@
             // pictureBox5
             // 
             this.pictureBox5.Image = global::ProgettoJA.Properties.Resources.termometroAssenzaSegnale;
-            this.pictureBox5.InitialImage = global::ProgettoJA.Properties.Resources.termometroAssenzaSegnale;
             this.pictureBox5.Location = new System.Drawing.Point(235, 219);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(58, 136);
