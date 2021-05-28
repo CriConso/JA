@@ -31,11 +31,12 @@ void setup() {
   Serial.begin(115200);
   EEPROM.begin(512);
   Serial.println("Setup iniziato - v. 0.8");
-  if(char(EEPROM.read(0) == '1')){
-    leggi();
-  }
+  
   if (!WiFi.config(local_IP, gateway, subnet)) {
     Serial.println("STA Failed to configure");
+  }
+  if(char(EEPROM.read(0) == '1')){
+    leggi();
   }
   
   // Set WiFi to station mode and disconnect from an AP if it was previously connected

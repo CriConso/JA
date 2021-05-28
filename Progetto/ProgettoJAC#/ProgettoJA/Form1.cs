@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -33,6 +34,7 @@ namespace ProgettoJA
         {
             //receivingUdpClient.Close();
             Collegamento C = new Collegamento(this, 1);
+            C.label1.Text = "Stato sensore uno";
             C.Show();
             this.Hide();
         }
@@ -58,6 +60,7 @@ namespace ProgettoJA
         private void button5_Click(object sender, EventArgs e)
         {
             Collegamento C = new Collegamento(this, 2);
+            C.label1.Text = "Stato sensore due";
             C.Show();
             this.Hide();
         }
@@ -75,9 +78,9 @@ namespace ProgettoJA
                 //MessageBox.Show(s);
                 if (s == "s")
                 {
-                    
+                    button3.Enabled = true;
                     label12.ForeColor = Color.Green;
-                    //button4.Visible = true;
+                    M1.setConn();
                     ricevi = false;
                 }
                 //Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate { }));
@@ -100,8 +103,13 @@ namespace ProgettoJA
                 string[] righe = letto.Split('\n');
                 string[] riga = righe[1].Split(';');
                 M1.setIP(riga[1]);
-                MessageBox.Show(M1.getIP());
+                //MessageBox.Show(M1.getIP());
             }
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -111,17 +119,93 @@ namespace ProgettoJA
             UdpClient udpClient = new UdpClient(M1.getIP(), 82);
             Byte[] sendBytes = Encoding.ASCII.GetBytes("d");
             udpClient.Send(sendBytes, sendBytes.Length);
-            //while (ricevi)
+            int k = 50;
+            label14.Text = "Ricezione...";
+            //while (k>0)
             //{
-            Byte[] receiveBytes = receivingUdpClient2.Receive(ref RemoteIpEndPoint);
+                //Thread.Sleep(900);
+                Byte[] receiveBytes = receivingUdpClient2.Receive(ref RemoteIpEndPoint);
+                label14.Text = "Ricevuto, scrivo";
+                string s = System.Text.Encoding.UTF8.GetString(receiveBytes);
 
-            string s = System.Text.Encoding.UTF8.GetString(receiveBytes);
-
-            string[] teu = s.Split(';');
-            label7.Text = teu[0];
-            label8.Text = teu[1];
+                string[] teu = s.Split(';');
+                label7.Text = teu[0];
+                label8.Text = teu[1];
+               // k--;
+            //}
             //MessageBox.Show(s);
+            float temperatura, umidità;
+            temperatura = Convert.ToInt32(float.Parse(label7.Text))/100;
+            umidità = Convert.ToInt32(float.Parse(label8.Text)) / 100;
+           // MessageBox.Show(umidità.ToString());
+            if (temperatura < -5)
+            {
+                pictureBox1.ImageLocation = @"\..\..\..\..\immaginiTemperatura\termometroFreddo.png";
+            }
+            else if (temperatura < 0)
+            {
+                pictureBox1.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiTemperatura\termometro-5.png";
+                ////MessageBox.Show(Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiTemperatura\termometro-5.png");
+            }
+            else if (temperatura < 5)
+            {
+                pictureBox1.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiTemperatura\termometro0.png";
+                MessageBox.Show(Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiTemperatura\termometro0.png");
+            }
+            else if (temperatura < 10)
+            {
+                pictureBox1.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiTemperatura\termometro5.png";
+                //MessageBox.Show(Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiTemperatura\termometro5.png");
+            }
+            else if (temperatura < 15)
+            {
+                pictureBox1.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiTemperatura\termometro10.png";
+                MessageBox.Show(Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiTemperatura\termometro10.png");
+            }
+            else if (temperatura < 20)
+            {
+                pictureBox1.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiTemperatura\termometro15.png";
+                //MessageBox.Show(Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiTemperatura\termometro15.png");
+            }
+            else if (temperatura < 25)
+            {
+                pictureBox1.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiTemperatura\termometro20.png";
+                //MessageBox.Show(Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiTemperatura\termometro20.png");
+            }
+            else if (temperatura < 30)
+            {
+                pictureBox1.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiTemperatura\termometro25.png";
+                //MessageBox.Show(Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiTemperatura\termometro25.png");
+            }
 
+            if (umidità<100 && umidità > 80)
+            {
+                pictureBox3.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiPila\pilaLVL6.png";
+            }
+            else if (umidità < 80 && umidità > 64)
+            {
+                pictureBox3.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiPila\pilaLVL5.png";
+            }
+            else if (umidità < 64 && umidità > 48)
+            {
+                pictureBox3.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiPila\pilaLVL4.png";
+            }
+            else if (umidità < 48 && umidità > 32)
+            {
+                pictureBox3.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiPila\pilaLVL3.png";
+            }
+            else if (umidità < 32 && umidità > 16)
+            {
+                pictureBox3.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiPila\pilaLVL2.png";
+            }
+            else if (umidità < 16 && umidità > 0)
+            {
+                pictureBox3.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiPila\pilaLVL1.png";
+            }
+            else if (umidità == 0)
+            {
+                pictureBox3.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiPila\pilaLVL1.png";
+            }
             //Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate { }));
             //}
         }

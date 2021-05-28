@@ -33,5 +33,4 @@ Elenco prodotti/materiali:
 	- 2xModulo wireless ESP8266 v01 
 	- Comunicatore Seriale FTDI 232
 	- Cavi
-	- Breadboard
-	- Arduino	
+	- Breadboard	

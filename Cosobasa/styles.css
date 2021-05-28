@@ -26,6 +26,14 @@ body {
   background-color: rgba(250, 179, 87, 0.288);
   width: 100%;
 }
+
+.div-sopra4 {
+  margin: 0;
+  height: auto;
+  margin-top: 1em;
+  background-color: rgba(250, 179, 87, 0.288);
+  width: 100%;
+}
 .div-spazio {
   height: 28em;
   background-color: rgb(255, 252, 221);
@@ -66,7 +74,8 @@ font-size: 50px;
     color: rgba(0, 0, 0, 0.651);
     text-align: center;
     font-size: 25px;
-    
+         
+
     }
     #testoMain-6{
      
@@ -75,6 +84,72 @@ font-size: 50px;
     font-size: 40px;
     
     }
+
+             #testoMain-7{
+      text-align: center;
+      font-family:Hei Reina;
+      font-size: 40px;
+    
+    }
+
+            #testoMain-8{
+     
+      text-align: center;
+      font-family:Hei Reina;
+      font-size: 40px;
+      margin-top: -0.2em; 
+      }
+
+      #testoMain-9{
+        font-family:Rougant;
+        color: rgba(0, 0, 0, 0.651);
+        text-align: center;
+        font-size: 28px;
+        
+        }
+
+        #testoMain-10{
+          font-family:Rougant;
+          color: rgba(0, 0, 0, 0.651);
+          text-align: center;
+          font-size: 28px;
+          margin-bottom: -1.2em;  
+          }   
+          
+          #testoMain-11{
+            font-family:Rougant;
+            color: rgba(0, 0, 0, 0.651);
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: -1.2em;  
+            }  
+
+            #testoMain-12{
+              font-family:Rougant;
+              color: rgba(0, 0, 0, 0.651);
+              text-align: center;
+              font-size: 28px; 
+              } 
+
+              #testoMain-13{
+     
+                text-align: center;
+                font-family:Hei Reina;
+                font-size: 40px;
+                margin-top: 0.4em; 
+                }
+
+                #testoMain-14{
+     
+                  text-align: center;
+                  font-family:Hei Reina;
+                  font-size: 40px;
+                  margin-top: -2em;
+                  }
+#imgUmidino{
+  width: 200px;
+  margin-top: 0.3em;
+}
 
 #imgMain{
 width: 200px;
@@ -224,4 +299,8 @@ color: rgba(0, 0, 0, 0.692);
 .fontNav{
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
   font-size: 15px;
+}
+
+.zoom:hover {
+  transform: scale(1.5);
 }
