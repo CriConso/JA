@@ -104,5 +104,14 @@
   <ItemGroup>
     <None Include="Resources\IPMODULI.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\termometroAssenzaSegnale.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pilaAssenzaSegnale.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pilaLVL6.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
