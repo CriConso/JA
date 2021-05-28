@@ -83,9 +83,26 @@ namespace ProgettoJA
                     M1.setConn();
                     ricevi = false;
                 }
-                //Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate { }));
+                MessageBox.Show("Primo fatto");
+                //Thread.Sleep(4000);
+                //UdpClient udpClient2 = new UdpClient(M2.getIP(), 82);
+                //udpClient2.Send(sendBytes, sendBytes.Length);
+                //while (ricevi)
+                //{
+                //    Byte[] receiveBytes2 = receivingUdpClient.Receive(ref RemoteIpEndPoint);
+                //    s = System.Text.Encoding.UTF8.GetString(receiveBytes2);
+                //    //MessageBox.Show(s);
+                //    if (s == "s")
+                //    {
+                //        button3.Enabled = true;
+                //        label13.ForeColor = Color.Green;
+                //        M2.setConn();
+                //        ricevi = false;
+                //    }
+                //    //Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate { }));
+                //}
             }
-        }
+        } 
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -101,8 +118,13 @@ namespace ProgettoJA
             else
             {
                 string[] righe = letto.Split('\n');
-                string[] riga = righe[1].Split(';');
-                M1.setIP(riga[1]);
+                string[] riga1 = righe[1].Split(';');
+                string[] riga2 = righe[2].Split(';');
+                M1.setIP(riga1[1]);
+                if (riga2[0]=="1")
+                {
+                    M2.setIP(riga2[1]);
+                }
                 //MessageBox.Show(M1.getIP());
             }
         }
@@ -201,10 +223,12 @@ namespace ProgettoJA
             else if (umidità < 16 && umidità > 0)
             {
                 pictureBox3.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiPila\pilaLVL1.png";
+                pictureBox3.ImageLocation = "https://cdn.discordapp.com/attachments/699741150256431164/847892762846429194/pila_2.png";
             }
             else if (umidità == 0)
             {
-                pictureBox3.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiPila\pilaLVL1.png";
+                //pictureBox3.ImageLocation = Directory.GetCurrentDirectory() + @"\..\..\..\..\immaginiPila\pilaLVL1.png";
+                
             }
             //Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate { }));
             //}

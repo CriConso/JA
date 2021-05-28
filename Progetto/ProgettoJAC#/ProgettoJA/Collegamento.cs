@@ -45,6 +45,7 @@ namespace ProgettoJA
                 M = new CModulo(2);
                 M = F.M2;
             }
+            MessageBox.Show(M.getIP());
             listView1.View = View.Details;
             // Allow the user to edit item text.
             listView1.LabelEdit = true;
