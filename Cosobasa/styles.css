@@ -300,3 +300,7 @@ color: rgba(0, 0, 0, 0.692);
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
   font-size: 15px;
 }
+
+.zoom:hover {
+  transform: scale(1.5);
+}
