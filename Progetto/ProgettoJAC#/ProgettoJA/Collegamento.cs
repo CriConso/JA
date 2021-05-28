@@ -25,22 +25,25 @@ namespace ProgettoJA
         public SerialPort P;
         int cont, i;
         string ip;
-        UdpClient receivingUdpClient = new UdpClient(11000);
+        UdpClient receivingUdpClient;
         IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
         CModulo M;
         Form1 F;
         public Collegamento(Form1 F, int numm)
         {
             InitializeComponent();
+            receivingUdpClient = F.receivingUdpClient;
             i = 0;
             this.F = F;
             if (numm==1)
             {
-                F.M1 = M;
+                M = new CModulo(1);
+                M= F.M1;
             }
             else if(numm==2)
             {
-                F.M2 = M;
+                M = new CModulo(2);
+                M = F.M2;
             }
             listView1.View = View.Details;
             // Allow the user to edit item text.
@@ -58,7 +61,9 @@ namespace ProgettoJA
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            
+            F.Show();
+            this.Hide();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -103,7 +108,7 @@ namespace ProgettoJA
 
         private void button3_Click(object sender, EventArgs e)
         {
-            bool ricevi = true; ;
+            bool ricevi = true;
             UdpClient udpClient = new UdpClient(M.getIP(), 82);
             Byte[] sendBytes = Encoding.ASCII.GetBytes("b");
             udpClient.Send(sendBytes, sendBytes.Length);
